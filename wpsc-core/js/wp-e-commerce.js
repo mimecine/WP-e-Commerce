@@ -358,7 +358,7 @@ jQuery(document).ready(function ($) {
 		parent_form = jQuery(this).parents("form.wpsc_empty_the_cart");
 		form_values = "ajax=true&";
 		form_values += jQuery(parent_form).serialize();
-		jQuery.post( 'index.php', form_values, function(returned_data) {
+		jQuery.post( wpsc_ajax.ajaxurl , form_values, function(returned_data) {
 			eval(returned_data);
 		});
 		return false;
@@ -383,7 +383,7 @@ function switchmethod( key, key1 ){
 		option : key,
 		method : key1
 	}
-	jQuery.post( 'index.php', data, function(returned_data) {
+	jQuery.post( wpsc_ajax.ajaxurl , data, function(returned_data) {
 		eval(returned_data);
 	});
 }
@@ -423,14 +423,14 @@ function shopping_cart_collapser() {
 	switch(jQuery("#sliding_cart").css("display")) {
 		case 'none':
 			jQuery("#sliding_cart").slideToggle("fast",function(){
-				jQuery.post( 'index.php', "ajax=true&set_slider=true&state=1", function(returned_data) { });
+				jQuery.post( wpsc_ajax.ajaxurl , "ajax=true&set_slider=true&state=1", function(returned_data) { });
 				jQuery("#fancy_collapser").attr("src", (WPSC_CORE_IMAGES_URL + "/minus.png"));
 			});
 			break;
 
 		default:
 			jQuery("#sliding_cart").slideToggle("fast",function(){
-				jQuery.post( 'index.php', "ajax=true&set_slider=true&state=0", function(returned_data) { });
+				jQuery.post( wpsc_ajax.ajaxurl , "ajax=true&set_slider=true&state=0", function(returned_data) { });
 				jQuery("#fancy_collapser").attr("src", (WPSC_CORE_IMAGES_URL + "/plus.png"));
 			});
 			break;
@@ -447,7 +447,7 @@ function set_billing_country(html_form_id, form_id){
 	}
 
 	form_values = "wpsc_ajax_action=change_tax&form_id="+form_id+"&billing_country="+country+billing_region;
-	jQuery.post( 'index.php', form_values, function(returned_data) {
+	jQuery.post( wpsc_ajax.ajaxurl , form_values, function(returned_data) {
 		eval(returned_data);
 		if(jQuery("#shippingSameBilling").is(':checked')){
 			jQuery('.shipping_region').parent().parent().hide();
@@ -475,7 +475,7 @@ function set_shipping_country(html_form_id, form_id){
 		shipping_region: region
 	}
 
-	jQuery.post( 'index.php', form_values, function(returned_data) {
+	jQuery.post( wpsc_ajax.ajaxurl , form_values, function(returned_data) {
 		eval(returned_data);
 		if(jQuery("#shippingSameBilling").is(':checked')){
 			jQuery('.shipping_region').parent().parent().hide();
